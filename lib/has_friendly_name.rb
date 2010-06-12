@@ -16,9 +16,26 @@ module HasFriendlyName
       before_create :generate_friendly_name
       include HasFriendlyName::InstanceMethods
     end
+    
+    def find_by_friendly_name(query)
+      obj = find(:first, :conditions => "friendly_name ='#{query}'")
+      
+      if query.match(/\d+/)
+        obj = find(:first, :conditions => "friendly_name = '#{query.gsub(/-\d+/, "")}'") unless obj
+        obj = find(:first, :conditions => "friendly_name LIKE '#{query.gsub(/-\d+/, "")}-%'") unless obj
+      end
+      
+        
+      raise ActiveRecord::RecordNotFound, "Couldn't find #{name} with friendly_name #{query}" unless obj
+
+      obj
+    end
+    
   end
   
   module InstanceMethods
+    
+    
     
     def generate_friendly_name              
       self.friendly_name = send(self.has_friendly_name_options[:from].to_s.to_sym).to_friendly(self.has_friendly_name_options)
