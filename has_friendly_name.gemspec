@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.version = "0.3"
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors     = ["Dennis Meise"]
-  s.date        = %q{2010-03-17}
+  s.date        = %q{2010-06-12}
   s.summary     = %q{HasFriendlyName adds a search engine friendly name to your active record model.}
   s.homepage = %q{http://www.gitub.com/netjungle/has_friendly_name}
   s.email       = %q{gems@dennis-meise.de}
