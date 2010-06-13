@@ -41,7 +41,7 @@ module HasFriendlyName
       self.friendly_name = send(self.has_friendly_name_options[:from].to_s.to_sym).to_friendly(self.has_friendly_name_options)
       
       if self.has_friendly_name_options[:unique] 
-        checkmodel=self.class.find_by_friendly_name(self.friendly_name)          
+        checkmodel=self.class.find(:first, :conditions => "friendly_name='#{self.friendly_name}'")          
         if checkmodel and checkmodel!=self
           self.friendly_name+='-'+(self.class.count+1).to_s
         end
