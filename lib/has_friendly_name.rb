@@ -20,7 +20,7 @@ module HasFriendlyName
     def find_by_friendly_name(query)
       obj = find(:first, :conditions => "friendly_name ='#{query}'")
       
-      if query.match(/\d+/)
+      if query.match(/\d+/) and !options[:exact]
         obj = find(:first, :conditions => "friendly_name = '#{query.gsub(/-\d+/, "")}'") unless obj
         obj = find(:first, :conditions => "friendly_name LIKE '#{query.gsub(/-\d+/, "")}-%'") unless obj
       end
