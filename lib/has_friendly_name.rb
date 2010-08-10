@@ -17,7 +17,7 @@ module HasFriendlyName
       include HasFriendlyName::InstanceMethods
     end
     
-    def find_by_friendly_name(query)
+    def find_by_friendly_name(query, options={})
       obj = find(:first, :conditions => "friendly_name ='#{query}'")
       
       if query.match(/\d+/) and !options[:exact]
